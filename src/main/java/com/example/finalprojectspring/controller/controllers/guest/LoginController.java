@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.controller.controllers.user;
+package com.example.finalprojectspring.controller.controllers.guest;
 
 import com.example.finalprojectspring.controller.util.CommandUtility;
 import com.example.finalprojectspring.model.entity.User;

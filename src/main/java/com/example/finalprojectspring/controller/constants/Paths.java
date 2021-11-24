@@ -11,6 +11,8 @@ public interface Paths {
     String LOGIN_FILE = "guest/login";
     String LOGIN_PAGE = "/app/guest/login";
 
+    String LOG_OUT_PATH = "/app/*/logout";
+
     String REGISTRATION_FILE = "guest/registration";
     String REGISTRATION_PAGE = "/app/guest/registration";
 

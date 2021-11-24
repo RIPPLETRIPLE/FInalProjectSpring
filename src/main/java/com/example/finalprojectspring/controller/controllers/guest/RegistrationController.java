@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.controller.controllers.user;
+package com.example.finalprojectspring.controller.controllers.guest;
 
 import com.example.finalprojectspring.controller.util.ValidationUtil;
 import com.example.finalprojectspring.model.entity.User;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
