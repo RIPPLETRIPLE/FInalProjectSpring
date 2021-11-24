@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import static com.example.finalprojectspring.controller.constants.Paths.*;
 
 @Controller
-public class Registration {
+public class RegistrationController {
     @GetMapping(REGISTRATION_PAGE)
     public String getRegistration() {
         return REGISTRATION_FILE;

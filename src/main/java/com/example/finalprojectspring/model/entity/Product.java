@@ -17,6 +17,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private int price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "sex", nullable = false)
     private Sex sex;
 

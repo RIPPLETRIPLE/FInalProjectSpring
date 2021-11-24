@@ -193,6 +193,7 @@
                             <input class="form-control" type="file" name="image"
                                    accept="image/x-png,image/gif,image/jpeg" required>
                         </div>
+                        <br/>
                         <button class="w-100 btn btn-lg btn-primary" type="submit"><fmt:message key="accept"
                                                                                                 bundle="${bundle}"/></button>
 
