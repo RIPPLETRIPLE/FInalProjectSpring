@@ -10,7 +10,6 @@ public interface Paths {
 
     String LOGIN_FILE = "guest/login";
     String LOGIN_PAGE = "/app/guest/login";
-    String REDIRECT_LOGIN = "redirect:/app/guest/login";
 
     String REGISTRATION_FILE = "guest/registration";
     String REGISTRATION_PAGE = "/app/guest/registration";

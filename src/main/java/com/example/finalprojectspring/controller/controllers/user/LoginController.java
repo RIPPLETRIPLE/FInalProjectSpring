@@ -41,7 +41,7 @@ public class LoginController {
             if (CommandUtility.checkUserIsLogged(session, user)) {
                 session.setAttribute("error", true);
                 session.setAttribute("errorType", "user_already_logged");
-                return REDIRECT_LOGIN;
+                return REDIRECT + LOGIN_PAGE;
             }
 
             session.setAttribute("user", user);
@@ -56,6 +56,6 @@ public class LoginController {
         session.setAttribute("error", true);
         session.setAttribute("errorType", "wrong_data");
 
-        return REDIRECT_LOGIN ;
+        return REDIRECT + LOGIN_PAGE ;
     }
 }

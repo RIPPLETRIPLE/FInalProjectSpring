@@ -26,8 +26,10 @@ public class WebController {
     public String getIndexForUser(Model model) {
         HttpSession session = httpSessionFactory.getObject();
         Map<String, Object> attributes = new HashMap<>();
+
         attributes.put("products", userService.getAllProducts());
         model.addAllAttributes(attributes);
+
         User user = session.getAttribute("user") == null ? null : (User) session.getAttribute("user");
         if (user == null || user.getRole() == User.Role.User) {
             return INDEX_FILE;

@@ -28,17 +28,20 @@ public class UserService {
 
     @Autowired
     private ColorRepository colorRepository;
+
     //------- UserManage -------
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User createNewUser(User user) {
-        return userRepository.save(user);
+    public boolean createNewUser(User user) {
+        if (userRepository.existsUserByLogin(user.getLogin())) return false;
+        userRepository.save(user);
+        return true;
     }
 
     public boolean DBContainsUser(User user) {
-        User userWithSuchLogin =  userRepository.findFirstByLogin(user.getLogin());
+        User userWithSuchLogin = userRepository.findFirstByLogin(user.getLogin());
         if (userWithSuchLogin != null && user.getPassword().equals(userWithSuchLogin.getPassword())) {
             user.setRole(userWithSuchLogin.getRole());
             user.setId(userWithSuchLogin.getId());
@@ -47,6 +50,7 @@ public class UserService {
         }
         return false;
     }
+
     //------- ProductManage -------
     public List<Product> getAllProducts() {
         return productRepository.findAll();
