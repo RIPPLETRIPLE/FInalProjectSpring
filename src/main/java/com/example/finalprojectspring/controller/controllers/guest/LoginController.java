@@ -25,12 +25,12 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @GetMapping(LOGIN_PAGE)
+    @GetMapping(LOGIN_PATH)
     public String getLogin() {
         return LOGIN_FILE;
     }
 
-    @PostMapping(LOGIN_PAGE)
+    @PostMapping(LOGIN_PATH)
     public String logUser(@RequestParam(name = "login") String login
             , @RequestParam(name = "password") String password) {
         HttpSession session = httpSessionFactory.getObject();
@@ -41,7 +41,7 @@ public class LoginController {
             if (CommandUtility.checkUserIsLogged(session, user)) {
                 session.setAttribute("error", true);
                 session.setAttribute("errorType", "user_already_logged");
-                return REDIRECT + LOGIN_PAGE;
+                return REDIRECT + LOGIN_PATH;
             }
 
             session.setAttribute("user", user);
@@ -56,6 +56,6 @@ public class LoginController {
         session.setAttribute("error", true);
         session.setAttribute("errorType", "wrong_data");
 
-        return REDIRECT + LOGIN_PAGE ;
+        return REDIRECT + LOGIN_PATH;
     }
 }

@@ -26,12 +26,12 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    @GetMapping(REGISTRATION_PAGE)
+    @GetMapping(REGISTRATION_PATH)
     public String getRegistration() {
         return REGISTRATION_FILE;
     }
 
-    @PostMapping(REGISTRATION_PAGE)
+    @PostMapping(REGISTRATION_PATH)
     public String regUser(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password, Model model) {
         HttpSession session = httpSessionFactory.getObject();
         Map<String, Object> attributes = new HashMap<>();
@@ -39,13 +39,13 @@ public class RegistrationController {
 
         if (!ValidationUtil.isLoginValid(login) || !ValidationUtil.isPasswordValid(password)) {
             attributes.put("error", "invalid_data");
-            return REDIRECT + REGISTRATION_PAGE;
+            return REDIRECT + REGISTRATION_PATH;
         }
         if (userService.createNewUser(User.createUser(login, password, User.Role.User, User.UserStatus.Unblocked))) {
-            return REDIRECT + LOGIN_PAGE;
+            return REDIRECT + LOGIN_PATH;
         }
 
         session.setAttribute("loginAlreadyExist", "true");
-        return REDIRECT + REGISTRATION_PAGE;
+        return REDIRECT + REGISTRATION_PATH;
     }
 }

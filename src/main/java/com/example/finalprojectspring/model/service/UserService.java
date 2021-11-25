@@ -1,7 +1,9 @@
 package com.example.finalprojectspring.model.service;
 
+import com.example.finalprojectspring.model.entity.Order;
 import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.entity.User;
+import com.example.finalprojectspring.model.entity.enums.OrderStatus;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,4 +81,26 @@ public class UserService {
         return sizeRepository.getById(sizeId);
     }
 
+    //------- OrderManage -------
+    public boolean createOrder(Order order) {
+        if (orderRepository.findOrderByUserAndStatusAndProduct(order.getUser(), order.getStatus(), order.getProduct()).isPresent()) {
+            return false;
+        }
+
+        orderRepository.save(order);
+        return true;
+    }
+
+
+    public List<Order> getOrdersByStatus(User user, OrderStatus status) {
+        return orderRepository.findOrdersByUserAndStatus(user, status);
+    }
+
+    public Order findOrderByUserAndStatusAndProduct(Order order) throws FieldDontPresent {
+        return orderRepository.findOrderByUserAndStatusAndProduct(order.getUser(), order.getStatus(), order.getProduct()).orElseThrow(FieldDontPresent::new);
+    }
+
+    public void updateOrder(Order order) {
+        orderRepository.save(order);
+    }
 }
