@@ -1,6 +1,7 @@
 package com.example.finalprojectspring.controller.controllers.guest;
 
 import com.example.finalprojectspring.controller.util.CommandUtility;
+import com.example.finalprojectspring.model.entity.Order;
 import com.example.finalprojectspring.model.entity.User;
 import com.example.finalprojectspring.model.service.UserService;
 import org.springframework.beans.factory.ObjectFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -47,7 +49,7 @@ public class LoginController {
             session.setAttribute("user", user);
 
             if (session.getAttribute("cart") != null && user.getRole() != User.Role.Admin) {
-//                userService.retainCartForLoggedUser((List<Order>) session.getAttribute("cart"), user);
+                userService.retainCartForLoggedUser((List<Order>) session.getAttribute("cart"), user);
                 session.removeAttribute("cart");
             }
 

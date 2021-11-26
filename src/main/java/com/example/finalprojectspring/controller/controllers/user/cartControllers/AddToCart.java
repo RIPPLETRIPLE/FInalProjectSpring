@@ -53,7 +53,7 @@ public class AddToCart {
                 Order orderToIncrement;
                 try {
                     orderToIncrement = userService.findOrderByUserAndStatusAndProduct(order);
-                    orderToIncrement.setQuantity(order.getQuantity() + 1);
+                    orderToIncrement.setQuantity(orderToIncrement.getQuantity() + 1);
                     userService.updateOrder(orderToIncrement);
                 } catch (FieldDontPresent e) {
                     e.printStackTrace();

@@ -32,6 +32,14 @@
             </thead>
             <tbody>
             <c:forEach items="${cart}" var="order">
+                <c:choose>
+                    <c:when test="${role == 'guest'}">
+                        <c:set var="id" value="${order.product.id}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="id" value="${order.id}"/>
+                    </c:otherwise>
+                </c:choose>
                 <tr>
                     <td>
                             ${order.product.name}
@@ -47,7 +55,7 @@
                         <input type="hidden" name="id" value="${order.product.id}" class="form-input">
                         <div class="form-group d-flex justify-content-between">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=increment&productId=${order.product.id}">
+                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=increment&id=${id}">
                                 <button type="submit"
                                         class="quantity-left-minus btn btn-success btn-number">+
                                 </button>
@@ -55,7 +63,7 @@
                             <input type="text" name="quantity" class="form-control" value="${order.quantity}"
                                    readonly>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=decrement&productId=${order.product.id}">
+                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=decrement&id=${id}">
                                 <button type="submit"
                                         class="quantity-left-minus btn btn-danger btn-number">-
                                 </button>
@@ -64,7 +72,7 @@
                     </td>
                     <td>
                         <form method="post"
-                              action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=remove&productId=${order.product.id}">
+                              action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=remove&id=${id}">
                             <button type="submit"
                                     class="btn btn-sm btn-danger"><fmt:message key="delete"
                                                                                bundle="${bundle}"/></button>
@@ -75,10 +83,11 @@
             </tbody>
         </table>
         <c:if test="${not empty cart}">
-            <div class="d-flex justify-content-end"><a href="${pageContext.request.contextPath}/app/${role}/buyFromCart"
-                                                       class="btn btn-primary"><fmt:message key="buy"
-                                                                                            bundle="${bundle}"/></a>
-            </div>
+            <form class="d-flex justify-content-end" method="post" action="${pageContext.request.contextPath}/app/${role}/buyFromCart">
+                <button type="submit"
+                        class="btn btn-primary"><fmt:message key="buy"
+                                                             bundle="${bundle}"/></button>
+            </form>
         </c:if>
     </div>
 </main>

@@ -103,4 +103,29 @@ public class UserService {
     public void updateOrder(Order order) {
         orderRepository.save(order);
     }
+
+    public Order getOrderByID(long orderId) throws FieldDontPresent {
+        return orderRepository.findById(orderId).orElseThrow(FieldDontPresent::new);
+    }
+
+    public void deleteOrder(Order order) {
+        orderRepository.delete(order);
+    }
+
+    public void updateStatusForOrders(List<Order> orders, OrderStatus registered) {
+        orders.forEach(e -> {
+            e.setStatus(registered);
+        });
+
+        orderRepository.saveAll(orders);
+    }
+
+    //------- CartManage -------
+    public void retainCartForLoggedUser(List<Order> cart, User user) {
+        cart.forEach(e -> {
+            e.setUser(user);
+        });
+
+        orderRepository.saveAll(cart);
+    }
 }

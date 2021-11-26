@@ -21,8 +21,13 @@ public interface Paths {
 
     String CART_FILE = "user/cart";
     String CART_PATH = "/app/*/cartPage";
+    String CART_PAGE = "/cartPage";
 
     String ADD_TO_CART_PATH = "/app/*/addToCart";
+
+    String CHANGE_PRODUCT_QUANTITY_PATH = "/app/*/changeProductQuantity";
+
+    String BUY_FROM_CART_PATH = "/app/*/buyFromCart";
 
     String PRODUCTS_MANAGE_FILE = "admin/productsManage";
 }
