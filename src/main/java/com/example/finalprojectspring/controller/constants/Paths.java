@@ -52,4 +52,6 @@ public interface Paths {
     String MANAGE_ORDERS_FILE = "admin/ordersManage";
 
     String UPDATE_ORDER_STATUS_PATH = "/app/admin/updateOrderStatus";
+
+    String DELETE_ORDER_PATH = "/app/admin/deleteOrder";
 }

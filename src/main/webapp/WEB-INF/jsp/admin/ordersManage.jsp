@@ -19,7 +19,8 @@
 <main>
     <div class="container my-3">
         <div class="input-group rounded">
-            <input type="search" id="search" onkeyup="search()" class="form-control rounded search" placeholder="<fmt:message key="search_by_login" bundle="${bundle}"/>" aria-label="Search"
+            <input type="search" id="search" onkeyup="search()" class="form-control rounded search"
+                   placeholder="<fmt:message key="search_by_login" bundle="${bundle}"/>" aria-label="Search"
                    aria-describedby="search-addon"/>
         </div>
         <table class="table table-light table-sortable" id="myTable">
@@ -76,9 +77,11 @@
                                 </td>
                             </form>
                             <td>
-                                <a href="${url}/deleteOrder?orderId=${order.id}"
-                                   class="btn btn-sm btn-danger"><fmt:message key="cancel"
-                                                                              bundle="${bundle}"/></a>
+                                <form action="${url}/deleteOrder" method="post">
+                                    <input type="text" name="orderId" value="${order.id}" hidden>
+                                    <button type="submit" class="btn btn-sm btn-danger"><fmt:message key="cancel"
+                                                                                                     bundle="${bundle}"/></button>
+                                </form>
                             </td>
                         </tr>
                     </c:if>
