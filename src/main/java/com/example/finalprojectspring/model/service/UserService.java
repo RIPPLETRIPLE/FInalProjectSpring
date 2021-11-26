@@ -47,7 +47,7 @@ public class UserService {
         if (userWithSuchLogin != null && user.getPassword().equals(userWithSuchLogin.getPassword())) {
             user.setRole(userWithSuchLogin.getRole());
             user.setId(userWithSuchLogin.getId());
-            user.setStatus(user.getStatus());
+            user.setStatus(userWithSuchLogin.getStatus());
             return true;
         }
         return false;

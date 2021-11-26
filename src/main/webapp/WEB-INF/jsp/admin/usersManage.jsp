@@ -44,14 +44,18 @@
                         <td class="d-flex justify-content-center">
                             <c:choose>
                                 <c:when test="${users.status.toString() == 'Unblocked'}">
-                                    <a class="btn btn-danger"
-                                       href="${url}/updateUserStatus?userId=${users.id}&status=Blocked">
-                                        <fmt:message key="block" bundle="${bundle}"/></a>
+                                    <form action="${url}/updateUserStatus?status=Blocked" method="post">
+                                        <input type="text" name="userId" value="${users.id}" hidden>
+                                        <button type="submit" class="btn btn-danger"><fmt:message key="block"
+                                                                                                   bundle="${bundle}"/></button>
+                                    </form>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="btn btn-primary"
-                                       href="${url}/updateUserStatus?userId=${users.id}&status=Unblocked">
-                                        <fmt:message key="unblock" bundle="${bundle}"/></a>
+                                    <form action="${url}/updateUserStatus?status=Unblocked" method="post">
+                                        <input type="text" name="userId" value="${users.id}" hidden>
+                                        <button type="submit" class="btn btn-primary"><fmt:message key="unblock"
+                                                                                                   bundle="${bundle}"/></button>
+                                    </form>
                                 </c:otherwise>
                             </c:choose>
                         </td>

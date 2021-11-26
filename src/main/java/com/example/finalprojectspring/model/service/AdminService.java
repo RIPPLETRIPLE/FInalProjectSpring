@@ -3,6 +3,7 @@ package com.example.finalprojectspring.model.service;
 import com.example.finalprojectspring.model.entity.Order;
 import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.entity.User;
+import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,11 @@ public class AdminService {
         return orderRepository.findOrdersByUser(user);
     }
 
+    public User getUserByID(long id) throws FieldDontPresent {
+        return userRepository.findById(id).orElseThrow(FieldDontPresent::new);
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
 }
