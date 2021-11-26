@@ -70,15 +70,25 @@ public class UserService {
     public Product.Category getCategoryByID(long categoryId) throws FieldDontPresent {
         return categoryRepository.findById(categoryId).orElseThrow(FieldDontPresent::new);
     }
+    public List<Product.Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
 
     //------- ColorManage -------
     public Product.Color getColorByID(long colorId) throws FieldDontPresent {
         return colorRepository.findById(colorId).orElseThrow(FieldDontPresent::new);
     }
+    public List<Product.Color> getAllColors() {
+        return colorRepository.findAll();
+    }
 
     //------- SizeManage -------
     public Product.Size getSizeByID(long sizeId) {
         return sizeRepository.getById(sizeId);
+    }
+
+    public List<Product.Size> getAllSizes() {
+        return sizeRepository.findAll();
     }
 
     //------- OrderManage -------

@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.finalprojectspring.controller.constants.Paths.INDEX_FILE;
-import static com.example.finalprojectspring.controller.constants.Paths.PRODUCTS_MANAGE_FILE;
+import static com.example.finalprojectspring.controller.constants.Paths.*;
 
 @Controller
 public class WebController {
@@ -35,7 +34,7 @@ public class WebController {
             return INDEX_FILE;
         }
 
-        return PRODUCTS_MANAGE_FILE;
+        return REDIRECT + PRODUCTS_MANAGE_PATH;
     }
 
 }

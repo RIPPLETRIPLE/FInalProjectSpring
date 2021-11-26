@@ -6,15 +6,15 @@ import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.entity.User;
 import com.example.finalprojectspring.model.entity.enums.OrderStatus;
 import com.example.finalprojectspring.model.service.UserService;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.io.File;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -91,7 +91,7 @@ public class CommandUtility {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(MAX_MEMORY_SIZE);
 
-        String uploadFolder = request.getServletContext().getRealPath("").replaceAll("OnlineStore.*", "") + "OnlineStore\\src\\main\\webapp\\product-image";
+        String uploadFolder = request.getServletContext().getRealPath("").replaceAll("FinalProjectSpring.*", "") + "product-image";
 
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setSizeMax(MAX_REQUEST_SIZE);
@@ -99,38 +99,35 @@ public class CommandUtility {
         Product product;
 
         try {
-            List<FileItem> items = upload.parseRequest((RequestContext) request);
+            request.getParameter("category");
+            int categoryId = Integer.parseInt(request.getParameter("category"));
+            int colorId = Integer.parseInt(request.getParameter("color"));
+            int sizeId = Integer.parseInt(request.getParameter("size"));
+            Product.Sex sex = Product.Sex.valueOf(request.getParameter("sex"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            String name = request.getParameter("name");
+            String image = request.getPart("image").getSubmittedFileName();
 
-            int categoryId = Integer.parseInt(items.get(0).getString());
-            int colorId = Integer.parseInt(items.get(1).getString());
-            int sizeId = Integer.parseInt(items.get(2).getString());
-            Product.Sex sex = Product.Sex.valueOf(items.get(3).getString());
-            int price = Integer.parseInt(items.get(4).getString());
-            String name = items.get(5).getString();
-            String image = items.get(6).getName();
 
             Product.Category category = userService.getCategoryByID(categoryId);
             Product.Color color = userService.getColorByID(colorId);
             Product.Size size = userService.getSizeByID(sizeId);
 
+
             product = Product.createProduct(0, name, price, sex, image, category, color, size);
 
-            loadFilesToDirectory(uploadFolder, items);
+            loadFilesToDirectory(uploadFolder, request.getPart("image"));
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return Optional.empty();
         }
         return Optional.of(product);
     }
 
-    private static void loadFilesToDirectory(String uploadFolder, List<FileItem> items) throws Exception {
-        for (FileItem item : items) {
-            if (!item.isFormField()) {
-                String fileName = new File(item.getName()).getName();
-                String filePath = uploadFolder + File.separator + fileName;
-                File uploadedFile = new File(filePath);
-                item.write(uploadedFile);
-            }
-        }
+    private static void loadFilesToDirectory(String uploadFolder, Part item) throws Exception {
+        String fileName = item.getSubmittedFileName();
+        String filePath = uploadFolder + File.separator + fileName;
+        File uploadedFile = new File(filePath);
     }
 
 

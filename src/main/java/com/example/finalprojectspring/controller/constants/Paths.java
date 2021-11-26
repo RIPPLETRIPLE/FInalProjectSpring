@@ -38,4 +38,18 @@ public interface Paths {
 
     String BLOCK_ERROR = "errors/blockError";
     String AUTH_ERROR = "errors/authError";
+
+    //----- ADMIN CONSTANTS ------//
+
+    String ADD_PRODUCT_PATH = "/app/admin/addProduct";
+
+    String PRODUCTS_MANAGE_PATH = "/app/admin/productsManagePage";
+
+    String UPDATE_PRODUCT_PATH = "/app/admin/updateProduct";
+
+    String ORDERS_MANAGE_PAGE = "/app/admin/ordersManagePage";
+
+    String MANAGE_ORDERS_FILE = "admin/ordersManage";
+
+    String UPDATE_ORDER_STATUS_PATH = "/app/admin/updateOrderStatus";
 }
