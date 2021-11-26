@@ -91,6 +91,9 @@ public class UserService {
         return true;
     }
 
+    public List<Order> getOrdersForUser(User user) {
+        return orderRepository.findOrdersByUser(user);
+    }
 
     public List<Order> getOrdersByStatus(User user, OrderStatus status) {
         return orderRepository.findOrdersByUserAndStatus(user, status);

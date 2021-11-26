@@ -55,7 +55,8 @@
                         <input type="hidden" name="id" value="${order.product.id}" class="form-input">
                         <div class="form-group d-flex justify-content-between">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=increment&id=${id}">
+                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=increment">
+                                <input type="text" name="id" value="${id}" hidden>
                                 <button type="submit"
                                         class="quantity-left-minus btn btn-success btn-number">+
                                 </button>
@@ -63,7 +64,8 @@
                             <input type="text" name="quantity" class="form-control" value="${order.quantity}"
                                    readonly>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=decrement&id=${id}">
+                                  action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=decrement">
+                                <input type="text" name="id" value="${id}" hidden>
                                 <button type="submit"
                                         class="quantity-left-minus btn btn-danger btn-number">-
                                 </button>
@@ -72,7 +74,8 @@
                     </td>
                     <td>
                         <form method="post"
-                              action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=remove&id=${id}">
+                              action="${pageContext.request.contextPath}/app/${role}/changeProductQuantity?action=remove">
+                            <input type="text" name="id" value="${id}" hidden>
                             <button type="submit"
                                     class="btn btn-sm btn-danger"><fmt:message key="delete"
                                                                                bundle="${bundle}"/></button>

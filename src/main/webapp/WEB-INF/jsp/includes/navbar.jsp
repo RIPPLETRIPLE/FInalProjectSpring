@@ -29,7 +29,7 @@
                     </li>
                 </c:if>
                 <c:if test="${role == 'user'}">
-                    <li class="nav-item"><a class="nav-link" href="${url}/ordersPage"><fmt:message key="orders"
+                    <li class="nav-item"><a class="nav-link" href="${url}/orderPage"><fmt:message key="orders"
                                                                                                    bundle="${bundle}"/></a>
                     </li>
                 </c:if>

@@ -29,5 +29,13 @@ public interface Paths {
 
     String BUY_FROM_CART_PATH = "/app/*/buyFromCart";
 
+    String ORDER_PATH = "/app/user/orderPage";
+    String ORDER_PAGE = "user/orders";
+
+    String CANCEL_REGISTERED_ORDER_PATH = "/app/user/cancelRegisteredOrder";
+
     String PRODUCTS_MANAGE_FILE = "admin/productsManage";
+
+    String BLOCK_ERROR = "errors/blockError";
+    String AUTH_ERROR = "errors/authError";
 }

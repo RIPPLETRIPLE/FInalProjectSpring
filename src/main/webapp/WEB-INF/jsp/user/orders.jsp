@@ -49,7 +49,8 @@
                     <td>
                         <c:if test="${order.status == 'Registered'}">
                             <form method="post"
-                                  action="${url}/cancelRegisteredOrder?action=remove&orderId=${order.id}">
+                                  action="${url}/cancelRegisteredOrder">
+                                <input type="text" name="orderId" value="${order.id}" hidden>
                                 <button type="submit"
                                         class="btn btn-sm btn-danger"><fmt:message key="cancel"
                                                                           bundle="${bundle}"/>

@@ -112,7 +112,8 @@
                                 <fmt:message key="currency" bundle="${bundle}"/></h6>
                             <div class="mt-3 d-flex justify-content-between">
                                 <form method="post"
-                                      action="${url}/addToCart?productId=${product.id}">
+                                      action="${url}/addToCart">
+                                    <input type="text" name="productId" value="${product.id}" hidden>
                                     <button type="submit"
                                             class="btn btn-dark"><fmt:message
                                             key="add_to_cart"
