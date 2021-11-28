@@ -6,6 +6,8 @@ import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.entity.User;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class ChangeProductQuantityController {
     @Autowired
     ObjectFactory<HttpSession> httpSessionFactory;
 
+    private final Logger logger = LogManager.getLogger(ChangeProductQuantityController.class);
+
     @PostMapping(CHANGE_PRODUCT_QUANTITY_PATH)
     public String changeProductQuantity(@RequestParam(name = "action") String action, @RequestParam(name = "id") int id) {
         HttpSession session = httpSessionFactory.getObject();
@@ -39,6 +43,7 @@ public class ChangeProductQuantityController {
             try {
                 product = userService.getProductByID(id);
             } catch (FieldDontPresent e) {
+                logger.warn(e.getMessage(), e);
                 return cartPage;
             }
             if (action.equals("increment")) {

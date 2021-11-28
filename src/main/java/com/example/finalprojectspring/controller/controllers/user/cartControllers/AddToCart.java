@@ -9,6 +9,8 @@ import com.example.finalprojectspring.model.entity.User;
 import com.example.finalprojectspring.model.entity.enums.OrderStatus;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class AddToCart {
     @Autowired
     UserService userService;
 
+    private final Logger logger = LogManager.getLogger(AddToCart.class);
+
     @PostMapping(ADD_TO_CART_PATH)
     public String addToCart(@Validated @RequestParam(name = "productId") int productId) {
         HttpSession session = httpSessionFactory.getObject();
@@ -41,7 +45,7 @@ public class AddToCart {
         try {
             product = userService.getProductByID(productId);
         } catch (FieldDontPresent e) {
-            //logger
+            logger.warn(e.getMessage(), e);
             return mainPage;
         }
 

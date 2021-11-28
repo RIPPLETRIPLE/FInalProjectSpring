@@ -85,10 +85,10 @@
                        href="${url}/mainPage?sortBy=price&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
                         key="by_price_high" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards asc"
-                       href="${url}/mainPage?sortBy=date&order=asc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=id&order=asc&page=${param.getOrDefault("page", "1")}"><fmt:message
                         key="by_date_low" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards"
-                       href="${url}/mainPage?sortBy=date&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=id&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
                         key="by_date_high" bundle="${bundle}"/></a></li>
             </ul>
         </div>

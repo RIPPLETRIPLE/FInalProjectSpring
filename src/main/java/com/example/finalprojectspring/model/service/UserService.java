@@ -7,8 +7,13 @@ import com.example.finalprojectspring.model.entity.enums.OrderStatus;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -58,6 +63,13 @@ public class UserService {
         return productRepository.findAll();
     }
 
+    public List<Product> getProductsWithSortAndPagination(int page, Sort.Direction sortDirection, String sortBY) {
+        return productRepository.findAll(PageRequest.of(page, 8, sortDirection, sortBY)).toList();
+    }
+
+    public long getCountOfProducts() {
+        return productRepository.count();
+    }
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }

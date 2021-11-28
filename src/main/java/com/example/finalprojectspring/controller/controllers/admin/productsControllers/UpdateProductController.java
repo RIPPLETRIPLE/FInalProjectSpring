@@ -3,6 +3,8 @@ package com.example.finalprojectspring.controller.controllers.admin.productsCont
 import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.service.AdminService;
 import com.example.finalprojectspring.model.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ public class UpdateProductController {
     @Autowired
     AdminService adminService;
 
+    private final Logger logger = LogManager.getLogger(UpdateProductController.class);
+
     @PostMapping(UPDATE_PRODUCT_PATH)
     public String updateProduct(HttpServletRequest request) {
         try {
@@ -31,7 +35,7 @@ public class UpdateProductController {
             product.setSex(Product.Sex.valueOf(request.getParameter("sex")));
             adminService.updateProduct(product);
         } catch (Exception ex) {
-            //logger
+            logger.warn(ex.getMessage(), ex);
         }
         return REDIRECT + PRODUCTS_MANAGE_PATH;
     }

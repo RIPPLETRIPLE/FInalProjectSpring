@@ -1,8 +1,11 @@
 package com.example.finalprojectspring.controller.filters;
 
+import com.example.finalprojectspring.controller.controllers.admin.productsControllers.AddProductController;
 import com.example.finalprojectspring.model.entity.User;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.service.AdminService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -19,6 +22,8 @@ public class UpdateUserFilter implements Filter {
     @Autowired
     private AdminService adminService;
 
+    private final Logger logger = LogManager.getLogger(UpdateUserFilter.class);
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = ((HttpServletRequest) servletRequest);
@@ -31,7 +36,7 @@ public class UpdateUserFilter implements Filter {
             try {
                 httpRequest.getSession().setAttribute("user", adminService.getUserByID((int) user.getId()));
             } catch (FieldDontPresent e) {
-                //logger
+                logger.warn(e.getMessage(), e);
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);

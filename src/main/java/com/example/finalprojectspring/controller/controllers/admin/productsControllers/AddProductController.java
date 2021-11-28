@@ -4,6 +4,8 @@ import com.example.finalprojectspring.model.entity.Product;
 import com.example.finalprojectspring.model.exception.FieldDontPresent;
 import com.example.finalprojectspring.model.service.AdminService;
 import com.example.finalprojectspring.model.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,8 @@ public class AddProductController {
     @Autowired
     UserService userService;
 
+    private final Logger logger = LogManager.getLogger(AddProductController.class);
+
     @PostMapping(ADD_PRODUCT_PATH)
     public String addProduct(@RequestParam(name = "image") MultipartFile image,
                              @RequestParam(name = "category") int categoryId,
@@ -36,7 +40,7 @@ public class AddProductController {
         try {
             adminService.saveImage(image);
         } catch (IOException e) {
-            //logger
+            logger.error(e.getMessage(), e);
             return mainPage;
         }
         try {
@@ -44,7 +48,7 @@ public class AddProductController {
                     , userService.getCategoryByID(categoryId), userService.getColorByID(colorId), userService.getSizeByID(sizeId));
             userService.createProduct(product);
         } catch (FieldDontPresent e) {
-            //logger
+            logger.error(e.getMessage(), e);
             return mainPage;
         }
         return mainPage;
