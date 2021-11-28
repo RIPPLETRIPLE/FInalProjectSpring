@@ -36,8 +36,8 @@ public interface Paths {
 
     String PRODUCTS_MANAGE_FILE = "admin/productsManage";
 
-    String BLOCK_ERROR = "errors/blockError";
-    String AUTH_ERROR = "errors/authError";
+    String BLOCK_ERROR = "/WEB-INF/jsp/errors/blockError.jsp";
+    String AUTH_ERROR = "/WEB-INF/jsp/errors/authError.jsp";
 
     //----- ADMIN CONSTANTS ------//
 
@@ -59,4 +59,6 @@ public interface Paths {
     String MANAGE_USER_FILE = "admin/usersManage";
 
     String UPDATE_USER_STATUS_PATH = "/app/admin/updateUserStatus";
+
+    String ERROR_PATH = "error";
 }
