@@ -6,6 +6,7 @@ import com.example.finalprojectspring.model.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 @Component
 @Order(4)
+@RequestMapping("/app/user/*")
 public class UpdateUserFilter implements Filter {
     @Autowired
     private AdminService adminService;

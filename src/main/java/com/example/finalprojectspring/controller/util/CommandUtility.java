@@ -84,54 +84,5 @@ public class CommandUtility {
     }
 
 
-    public static Optional<Product> extractProductFromForm(HttpServletRequest request, UserService userService) {
-        final int MAX_MEMORY_SIZE = 1024 * 1024 * 2;
-        final int MAX_REQUEST_SIZE = 1024 * 1024;
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(MAX_MEMORY_SIZE);
-
-        String uploadFolder = request.getServletContext().getRealPath("").replaceAll("FinalProjectSpring.*", "") + "product-image";
-
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setSizeMax(MAX_REQUEST_SIZE);
-
-        Product product;
-
-        try {
-            List<FileItem> items = upload.parseRequest(request);
-
-            int categoryId = Integer.parseInt(items.get(0).getString());
-            int colorId = Integer.parseInt(items.get(1).getString());
-            int sizeId = Integer.parseInt(items.get(2).getString());
-            Product.Sex sex = Product.Sex.valueOf(items.get(3).getString());
-            int price = Integer.parseInt(items.get(4).getString());
-            String name = items.get(5).getString();
-            String image = items.get(6).getName();
-
-            Product.Category category = userService.getCategoryByID(categoryId);
-            Product.Color color = userService.getColorByID(colorId);
-            Product.Size size = userService.getSizeByID(sizeId);
-
-            product = Product.createProduct(0, name, price, sex, image, category, color, size);
-
-            loadFilesToDirectory(uploadFolder, items);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
-        return Optional.of(product);
-    }
-
-    private static void loadFilesToDirectory(String uploadFolder, List<FileItem> items) throws Exception {
-        for (FileItem item : items) {
-            if (!item.isFormField()) {
-                String fileName = new File(item.getName()).getName();
-                String filePath = uploadFolder + File.separator + fileName;
-                File uploadedFile = new File(filePath);
-                item.write(uploadedFile);
-            }
-        }
-    }
-
 
 }

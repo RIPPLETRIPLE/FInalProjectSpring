@@ -61,4 +61,6 @@ public interface Paths {
     String UPDATE_USER_STATUS_PATH = "/app/admin/updateUserStatus";
 
     String ERROR_PATH = "error";
+
+    String DELETE_PRODUCT_PATH = "/app/admin/deleteProduct";
 }

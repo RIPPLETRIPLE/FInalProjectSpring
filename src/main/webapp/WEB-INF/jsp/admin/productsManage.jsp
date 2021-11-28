@@ -68,9 +68,11 @@
                     <td><a class="updateUrl"><fmt:message key="update"
                                                           bundle="${bundle}"/></a></td>
                     <td>
-                        <a href="${url}/deleteProduct?productId=${product.id}"
-                           class="btn btn-sm btn-danger"><fmt:message key="delete"
-                                                                      bundle="${bundle}"/></a>
+                        <form action="${url}/deleteProduct" method="post">
+                            <input type="text" name="productId" value="${product.id}" hidden>
+                            <button type="submit" class="btn btn-sm btn-danger"><fmt:message key="delete"
+                                                                                             bundle="${bundle}"/></button>
+                        </form>
                     </td>
                 </tr>
                 <tr class="update" hidden>
@@ -84,8 +86,9 @@
                         <td>
                             <select class="form-select" name="category" required>
                                 <c:forEach items="${requestScope.categories}" var="category">
-                                    <option <c:if test="${product.category.name == category.name}">selected
-                                            </c:if> value="${category.id}">${category.name}</option>
+                                    <option
+                                            <c:if test="${product.category.name == category.name}">selected
+                                    </c:if> value="${category.id}">${category.name}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -101,7 +104,7 @@
                                 <c:forEach items="${requestScope.sizes}" var="size">
                                     <option
                                             <c:if test="${product.size.size == size.size}">selected
-                                            </c:if> value="${size.id}">${size.size}</option>
+                                    </c:if> value="${size.id}">${size.size}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -110,7 +113,7 @@
                                 <c:forEach items="${requestScope.colors}" var="color">
                                     <option
                                             <c:if test="${product.color.color == color.color}">selected
-                                            </c:if> value="${color.id}">${color.color}</option>
+                                    </c:if> value="${color.id}">${color.color}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -118,15 +121,15 @@
                             <select class="form-select" name="sex" required>
                                 <option
                                         <c:if test="${product.sex.toString() == 'Male'}">selected
-                                        </c:if> value="Male">Male
+                                </c:if> value="Male">Male
                                 </option>
                                 <option
                                         <c:if test="${product.sex.toString() == 'Female'}">selected
-                                        </c:if> value="Female">Female
+                                </c:if> value="Female">Female
                                 </option>
                                 <option
                                         <c:if test="${product.sex.toString() == 'Unisex'}">selected
-                                        </c:if> value="Unisex">Unisex
+                                </c:if> value="Unisex">Unisex
                                 </option>
                             </select>
                         </td>
