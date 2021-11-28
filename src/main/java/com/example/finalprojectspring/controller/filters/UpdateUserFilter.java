@@ -1,31 +1,35 @@
 package com.example.finalprojectspring.controller.filters;
 
 import com.example.finalprojectspring.model.entity.User;
+import com.example.finalprojectspring.model.exception.FieldDontPresent;
+import com.example.finalprojectspring.model.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import static com.example.finalprojectspring.controller.constants.Paths.*;
 
 @Component
-@Order(5)
-@RequestMapping("/app/user/*")
-public class BlockFilter implements Filter {
+@Order(4)
+public class UpdateUserFilter implements Filter {
+    @Autowired
+    private AdminService adminService;
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = ((HttpServletRequest) servletRequest);
-        HttpServletResponse httpResponse = ((HttpServletResponse) servletResponse);
+
         User user = httpRequest.getSession().getAttribute("user") == null ? null
                 : ((User) httpRequest.getSession().getAttribute("user"));
 
         if (user != null) {
-            if (user.getStatus().equals(User.UserStatus.Blocked) && !httpRequest.getRequestURI().contains("logout") && !httpRequest.getRequestURI().contains(BLOCK_ERROR)) {
-                httpRequest.getRequestDispatcher(BLOCK_ERROR).forward(httpRequest, httpResponse);
-                return;
+            httpRequest.getSession().removeAttribute("user");
+            try {
+                httpRequest.getSession().setAttribute("user", adminService.getUserByID((int) user.getId()));
+            } catch (FieldDontPresent e) {
+                //logger
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);
