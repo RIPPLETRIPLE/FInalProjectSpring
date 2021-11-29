@@ -21,49 +21,53 @@
         <div class="d-flex justify-content-start card-header my-3">
             <div><fmt:message key="all_products" bundle="${bundle}"/></div>
         </div>
-                <form  class="d-flex justify-content-between" action="${url}/mainPage&page=${param.getOrDefault("page", "1")}" method="get">
-                <div class="category">
-                    <h4><fmt:message key="category" bundle="${bundle}"/></h4>
+        <form class="d-flex justify-content-between" action="${url}/mainPage"
+              method="get">
+            <input type="text" name="page" value="${param.getOrDefault("page", "1")}" hidden>
+            <input type="text" name="sortBy" value="${param.getOrDefault("sortBy", "id")}" hidden>
+            <input type="text" name="order" value="${param.getOrDefault("order", "asc")}" hidden>
+            <div>
+                <h4><fmt:message key="category" bundle="${bundle}"/></h4>
+                <select name="category">
+                    <option value="" selected><fmt:message key="choose_option" bundle="${bundle}"/></option>
                     <c:forEach items="${requestScope.categories}" var="category">
-                        <input type="checkbox" id="${category.name}" name="filterParam" value="category_ID=${category.id}"
-                               checked>
-                        <label for="${category.name}">${category.name}</label><br/>
-                    </c:forEach>
-                </div class="color">
-                <div>
-                    <h4><fmt:message key="color" bundle="${bundle}"/></h4>
+                    <option id="${category.name}" value="${category.id}">${category.name}</option>
+                        </c:forEach>
+                </select>
+            </div>
+            <div>
+                <h4><fmt:message key="color" bundle="${bundle}"/></h4>
+                <select name="color">
+                    <option value="" selected><fmt:message key="choose_option" bundle="${bundle}"/></option>
                     <c:forEach items="${requestScope.colors}" var="color">
-                        <input type="checkbox" id="${color.color}" name="filterParam" value="color_ID=${color.id}"
-                               checked>
-                        <label for="${color.color}">${color.color}</label><br/>
-                    </c:forEach>
-                </div>
-                <div class="size">
-                    <h4><fmt:message key="size" bundle="${bundle}"/></h4>
+                    <option id="${color.color}" value="${color.id}">${color.color}</option>
+                        </c:forEach>
+                </select>
+            </div>
+            <div>
+                <h4><fmt:message key="size" bundle="${bundle}"/></h4>
+                <select name="size">
+                    <option value="" selected><fmt:message key="choose_option" bundle="${bundle}"/></option>
                     <c:forEach items="${requestScope.sizes}" var="item">
-                        <input type="checkbox" id="${item.size}" name="filterParam" value="size_ID=${item.id}"
-                               checked>
-                        <label for="${item.size}">${item.size}</label><br/>
-                    </c:forEach>
-                </div>
-                <div class="sex">
-                    <h4><fmt:message key="sex" bundle="${bundle}"/></h4>
-                    <input type="checkbox" id="male" name="filterParam" value="sex='male'"
-                           checked>
-
-                    <label for="male"><fmt:message key="male" bundle="${bundle}"/></label><br/>
-                    <input type="checkbox" id="female" name="filterParam" value="sex='female'"
-                           checked>
-                    <label for="male"><fmt:message key="female" bundle="${bundle}"/></label><br/>
-                    <input type="checkbox" id="unisex" name="filterParam" value="sex='unisex'"
-                           checked>
-                    <label for="male"><fmt:message key="unisex" bundle="${bundle}"/></label><br/>
-                </div>
-                <div>
-                    <button type="submit"
-                            class="btn btn-sm btn-primary"><fmt:message key="filter"
-                                                                        bundle="${bundle}"/></button></div>
-                </form>
+                    <option id="${item.size}" name="filterParam" value="${item.id}">${item.size}</option>
+                        </c:forEach>
+                </select>
+            </div>
+            <div>
+                <h4><fmt:message key="sex" bundle="${bundle}"/></h4>
+                <select name="sex">
+                    <option value="" selected><fmt:message key="choose_option" bundle="${bundle}"/></option>
+                    <option id="male" name="filterParam" value="Male"><fmt:message key="male" bundle="${bundle}"/></option>
+                    <option id="female" name="filterParam" value="Female"><fmt:message key="female" bundle="${bundle}"/></option>
+                    <option id="unisex" name="filterParam" value="Unisex"><fmt:message key="unisex" bundle="${bundle}"/></option>
+                </select>
+            </div>
+            <div>
+                <button type="submit"
+                        class="btn btn-sm btn-primary"><fmt:message key="filter"
+                                                                    bundle="${bundle}"/></button>
+            </div>
+        </form>
 
 
         <div class="btn-group">
@@ -73,22 +77,22 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item sortCards asc"
-                       href="${url}/mainPage?sortBy=name&order=asc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=name&order=asc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_name_high" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards asc"
-                       href="${url}/mainPage?sortBy=name&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=name&order=desc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_name_low" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards asc"
-                       href="${url}/mainPage?sortBy=price&order=asc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=price&order=asc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_price_low" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards"
-                       href="${url}/mainPage?sortBy=price&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=price&order=desc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_price_high" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards asc"
-                       href="${url}/mainPage?sortBy=id&order=asc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=id&order=asc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_date_low" bundle="${bundle}"/></a></li>
                 <li><a class="dropdown-item sortCards"
-                       href="${url}/mainPage?sortBy=id&order=desc&page=${param.getOrDefault("page", "1")}"><fmt:message
+                       href="${url}/mainPage?sortBy=id&order=desc&page=${param.getOrDefault("page", "1")}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}"><fmt:message
                         key="by_date_high" bundle="${bundle}"/></a></li>
             </ul>
         </div>
@@ -131,7 +135,7 @@
                 <c:forEach items="${requestScope.pages}" var="page">
                     <li class="page-item">
                         <a class="page-link"
-                           href="${url}/mainPage?page=${page}">${page}</a>
+                           href="${url}/mainPage?page=${page}&category=${param.getOrDefault("category", "%")}&size=${param.getOrDefault("size", "%")}&color=${param.getOrDefault("color", "%")}&sex=${param.getOrDefault("sex", "%")}">${page}</a>
                     </li>
                 </c:forEach>
             </ul>

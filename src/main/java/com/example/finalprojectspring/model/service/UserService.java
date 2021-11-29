@@ -63,8 +63,8 @@ public class UserService {
         return productRepository.findAll();
     }
 
-    public List<Product> getProductsWithSortAndPagination(int page, Sort.Direction sortDirection, String sortBY) {
-        return productRepository.findAll(PageRequest.of(page, 8, sortDirection, sortBY)).toList();
+    public List<Product> getProductsWithSortAndPagination(String categoryPattern, String colorPattern, String sizePattern, String sexPattern, int page, Sort.Direction sortDirection, String sortBY) {
+        return productRepository.findWithFilter(categoryPattern, colorPattern, sizePattern, sexPattern,PageRequest.of(page, 8, sortDirection, sortBY));
     }
 
     public long getCountOfProducts() {
