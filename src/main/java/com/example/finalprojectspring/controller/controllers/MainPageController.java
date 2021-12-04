@@ -36,15 +36,11 @@ public class MainPageController {
 
     ) {
         HttpSession session = httpSessionFactory.getObject();
-        if (sex.equals("Male")) {
-            int i = 0;
-        }
         model.addAttribute("colors", userService.getAllColors());
         model.addAttribute("categories", userService.getAllCategories());
         model.addAttribute("sizes", userService.getAllSizes());
         model.addAttribute("products",
                 userService.getProductsWithSortAndPagination(category,color,size,sex, page - 1, Sort.Direction.fromString(sortDirection.toUpperCase(Locale.ROOT)), sortBy));
-
 
         List<Integer> pages = new ArrayList<>();
         long amountOfProducts = userService.getCountOfProducts();

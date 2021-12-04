@@ -9,6 +9,7 @@ import com.example.finalprojectspring.model.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
