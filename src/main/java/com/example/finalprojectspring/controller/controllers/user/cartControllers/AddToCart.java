@@ -32,7 +32,7 @@ public class AddToCart {
     private final Logger logger = LogManager.getLogger(AddToCart.class);
 
     @PostMapping(ADD_TO_CART_PATH)
-    public String addToCart(@Validated @RequestParam(name = "productId") int productId) {
+    public String addToCart(@RequestParam(name = "productId") int productId) {
         HttpSession session = httpSessionFactory.getObject();
 
         User user = session.getAttribute("user") != null ? (User) session.getAttribute("user") : null;
